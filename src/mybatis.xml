@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="org.mariadb.jdbc.Driver"/> <!-- db 커넥터 입력 (드라이버) -->
+        <property name="url" value="jdbc:mariadb://localhost:23306/edu"/> <!-- url 커넥터 입력 (주소) -->
+        <property name="username" value="root"/> <!-- name 입력 (사용자) -->
+        <property name="password" value="1234"/> <!-- password 입력 (비밀번호) -->
+      </dataSource>
+    </environment>
+  </environments>
+  <mappers>
+    <mapper resource="sql.xml"/>
+  </mappers>
+</configuration>
