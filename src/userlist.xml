@@ -2,10 +2,11 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="sql">
+<mapper namespace="user">
 
-	<select id="test" resultType="Integer">
-		select 1 as no
+	<select id="getuser" resultMap="user.Insert">
+    SELECT * FROM user
+
 	</select>
 
 
