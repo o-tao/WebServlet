@@ -29,26 +29,38 @@ public class Insert extends HttpServlet {
 //		String pwd = request.getParameter("pwd");
 //		String gender = request.getParameter("gender");
 		
+		
+//		Map<String, String> userMap = new HashMap<String, String>();
+//		userMap.put("name", name);
+//		userMap.put("email", email);
+//		userMap.put("pwd", pwd);
+//		userMap.put("gender", gender);
+		
 		DbTable data = new DbTable();
 		data.setName(request.getParameter("name"));
 		data.setEmail(request.getParameter("email"));
 		data.setPwd(request.getParameter("pwd"));
 		data.setGender(request.getParameter("gender"));
 		
-//		Map<String, String> userMap = new HashMap<String, String>();
-//		userMap.put("name", data.getName());
-//		userMap.put("email", data.getEmail());
-//		userMap.put("pwd", data.getPwd());
-//		userMap.put("gender", data.getGender());		
-		
 		SqlSession sql = DbConn.getFac().openSession();
 		int status = sql.insert("user.add", data);
-		sql.commit();
-		System.out.println("상태값: " + status);
+//		System.out.println("상태값: " + status);
+		if(status == 1) {
+			int no = sql.selectOne("user.getNo");
+//			System.out.println("no= " + no);
+			sql.commit();
+			
+//			response.sendRedirect("Select?no=" + no); // get방식 호출: 생성된 사용자 번호 전달
+			response.sendRedirect("List");
 		
-//		System.out.println("name: " + data.getName() + "\n" + "email: " + data.getEmail() + "\n" + "pwd: " + data.getPwd() + "\n" + "gender: " + data.getGender());
+		} else {
+			sql.rollback();
+			
+		}
 		
+		System.out.println("name: " + data.getName() + "\n" + "email: " + data.getEmail() + "\n" + "pwd: " + data.getPwd() + "\n" + "gender: " + data.getGender());
 		
+				
 		
 	}
 }

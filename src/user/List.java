@@ -13,6 +13,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.servlet.Utils;
 
 import db.DbConn;
+import db.DbTable;
 
 @WebServlet("/List")
 public class List extends HttpServlet {
@@ -20,9 +21,12 @@ public class List extends HttpServlet {
 	private final String page = "user/List.jsp";
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SqlSession sql = DbConn.getFac().openSession();
 		System.out.println("List get 접속");
-		List<DbTable> list = sql.selectList();
+		
+		SqlSession sql = DbConn.getFac().openSession();
+		java.util.List<DbTable> list = sql.selectList("user.findAll");
+		
+		request.setAttribute("list", list);
 		
 		Utils.print(request, response, page);
 	}

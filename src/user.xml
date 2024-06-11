@@ -9,7 +9,22 @@
 			(`name`, `email`, `pwd`, `gender`)
 		VALUE
 			(#{name}, #{email}, #{pwd}, #{gender});
+			<!-- $ 변수값만 가져옴, # 값, 타입까지 가져옴 -->
 			
 	</insert>
+	
+	<select id="getNo" resultType="Integer">
+		SELECT LAST_INSERT_ID() as no
+	
+	</select>
+	
+	<select id="findId" parameterType="String" resultType="HashMap">
+		SELECT * FROM user WHERE NO = ${no}
+	
+	</select>
+	
+	<select id="findAll" resultType="db.DbTable">
+		SELECT * FROM user
+	</select>
 	
 </mapper>
